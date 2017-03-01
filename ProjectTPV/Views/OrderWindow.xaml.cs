@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProjectTPV.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,16 +11,16 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ProjectTPV {
+namespace ProjectTPV.Views {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for OrderWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window {
-        public MainWindow() {
+    public partial class OrderWindow : Window {
+        public OrderWindow() {
             InitializeComponent();
+            DataContext = new ViewModel_Categories();
         }
     }
 }
