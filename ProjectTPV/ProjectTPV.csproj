@@ -142,15 +142,6 @@
   <ItemGroup>
     <Resource Include="Resources\Images\img_en_construccion.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Content Include="Databases\TPVDatabase.mdf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Databases\TPVDatabase_log.ldf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <DependentUpon>TPVDatabase.mdf</DependentUpon>
-    </Content>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
