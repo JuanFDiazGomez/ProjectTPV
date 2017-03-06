@@ -42,11 +42,11 @@ namespace ProjectTPV.Models {
             get { return _price; }
             set { _price = value; }
         }
-        public int Cuantity {
+        public int Quantity {
             get { return _cuantity; }
             set {
                 _cuantity = value;
-                OnPropertyChanged("Cuantity");
+                OnPropertyChanged("Quantity");
                 OnPropertyChanged("TotalPrice");
             }
         }

@@ -127,11 +127,11 @@ namespace ProjectTPV.ViewModels {
         }
 
         internal void AddProductOrder(Product product) {
-            if(product.Cuantity == 0) {
-                product.Cuantity = 1;
+            if(product.Quantity == 0) {
+                product.Quantity = 1;
                 _orderProducts.Add(product);
             } else {
-                product.Cuantity += 1;
+                product.Quantity += 1;
             }
             OnPropertyChanged("TotalPriceList");
         }
@@ -141,18 +141,18 @@ namespace ProjectTPV.ViewModels {
         }
 
         internal void OneMore(Product product) {
-            product.Cuantity++;
+            product.Quantity++;
             OnPropertyChanged("TotalPriceList");
         }
 
         internal void OneLess(Product product) {
-            product.Cuantity--;
+            product.Quantity--;
             OnPropertyChanged("TotalPriceList");
         }
 
         internal void DeleteOrderProduct(Product product) {
             _orderProducts.Remove(product);
-            product.Cuantity = 0;
+            product.Quantity = 0;
             OnPropertyChanged("TotalPriceList");
         }
 
@@ -271,7 +271,7 @@ namespace ProjectTPV.ViewModels {
         }
 
         public bool CanExecute(object parameter) {
-            return (parameter != null && (parameter as Product).Cuantity > 1);
+            return (parameter != null && (parameter as Product).Quantity > 1);
         }
 
         public void Execute(object parameter) {
