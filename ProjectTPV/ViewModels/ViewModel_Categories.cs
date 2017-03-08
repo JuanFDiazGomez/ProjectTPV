@@ -7,6 +7,13 @@ using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
+using System.Drawing.Printing;
+using System.Drawing;
+using System.Reflection;
+using PdfSharp.Pdf;
+using System.Diagnostics;
+using PdfSharp.Drawing;
+using System.IO;
 
 namespace ProjectTPV.ViewModels {
     public class ViewModel_Categories : INotifyPropertyChanged {
@@ -24,6 +31,7 @@ namespace ProjectTPV.ViewModels {
         private DeleteOrderProductCommand _deleteOrderProductCommand;
         private NextProductPageCommand _nextProductPageCommand;
         private PrevProductPageCommand _prevProductPageCommand;
+        private PrintTicketCommand _printTicketCommand;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -39,6 +47,7 @@ namespace ProjectTPV.ViewModels {
             _deleteOrderProductCommand = new DeleteOrderProductCommand(this);
             _nextProductPageCommand = new NextProductPageCommand(this);
             _prevProductPageCommand = new PrevProductPageCommand(this);
+            _printTicketCommand = new PrintTicketCommand(this);
             _currentPage = 1;
             InitilizeCategories();
         }
@@ -100,6 +109,9 @@ namespace ProjectTPV.ViewModels {
         }
         public PrevProductPageCommand PrevProductPageCommand {
             get { return _prevProductPageCommand; }
+        }
+        public PrintTicketCommand PrintTicketCommand {
+            get { return _printTicketCommand; }
         }
         public void InitilizeCategories() {
             String serv = "server=localhost;";
@@ -200,7 +212,7 @@ namespace ProjectTPV.ViewModels {
         }
 
         public string TotalPriceListTxt {
-            get { return TotalPriceList.ToString("N2"); }
+            get { return TotalPriceList.ToString("C2"); }
         }
 
         internal void PrevProductPage() {
@@ -209,6 +221,40 @@ namespace ProjectTPV.ViewModels {
             foreach (Product product in _currentProductList.Skip<Product>((_currentPage - 1) * LIMIT_PRODUCT_PAGE).Take<Product>(LIMIT_PRODUCT_PAGE)) {
                 _ShownProducts.Add(product);
             }
+
+        }
+
+        internal void PrintTicket() {
+            PdfDocument Pdf = new PdfDocument();
+            PdfPage PdfPage = Pdf.AddPage();
+            PdfPage.Width = 300;
+            PdfPage.Height = 155+(_orderProducts.Count*20)+100;
+            XGraphics graph = XGraphics.FromPdfPage(PdfPage);
+            XFont font = new XFont("Verdana",8, XFontStyle.Regular);
+            string root = Directory.GetParent(Assembly.GetEntryAssembly().Location).Parent.Parent.FullName;
+            string image = "\\Resources\\Images\\paymentLogo\\logoRestaurant.png";
+            XPen pen = new XPen(XColor.FromArgb(93, 25, 22), 2);
+            graph.DrawImage(XImage.FromFile(root+image), 25, 20);
+            graph.DrawRectangle(pen, 5, 5, 290, 145 + (_orderProducts.Count * 20) + 100);
+            pen.Width = 1;
+            graph.DrawLine(pen, 10, 140, 290, 140);
+            graph.DrawString("Cant.", font, XBrushes.Black, 10,150);
+            graph.DrawString("Producto", font, XBrushes.Black, 35,150);
+            graph.DrawString("Precio", font, XBrushes.Black, 240, 150);
+            for (int i = 0; i < _orderProducts.Count; i++) {
+                Product product = _orderProducts.ElementAt(i);
+                graph.DrawString(product.Quantity.ToString(), font, XBrushes.Black, 15, (i * 20) + 170);
+                graph.DrawString(product.Name.ToString(), font, XBrushes.Black, 35, (i * 20) + 170);
+                graph.DrawString(product.TotalPriceTxt, font, XBrushes.Black, 240, (i * 20) + 170);
+            }
+            graph.DrawLine(pen, 10, (_orderProducts.Count*20)+155, 290, (_orderProducts.Count * 20) + 155);
+            graph.DrawString("Precio total: "+TotalPriceListTxt, font, XBrushes.Black, 150, (_orderProducts.Count * 20) + 165,XStringFormats.Center);
+            graph.DrawString("IVA aplicado: " + (TotalPriceList*0.21).ToString("C2"), font, XBrushes.Black, 150, (_orderProducts.Count * 20) + 180, XStringFormats.Center);
+            font = new XFont("Verdana", 20, XFontStyle.Italic);
+            graph.DrawString("Gracias por su visita", font, XBrushes.Black, 160, (_orderProducts.Count * 20) + 215, XStringFormats.Center);
+            //graph.DrawString("This is my first PDF document", font, XBrushes.Black,new XRect(0, 130, PdfPage.Width.Point, PdfPage.Height.Point), XStringFormats.Center);
+            Pdf.Save("ja.pdf");
+            Process.Start("ja.pdf");
 
         }
     }
@@ -374,6 +420,27 @@ namespace ProjectTPV.ViewModels {
 
         public void Execute(object parameter) {
             _viewModel_Categories.PrevProductPage();
+
+        }
+    }
+
+    public class PrintTicketCommand : ICommand {
+        private ViewModel_Categories _viewModel_Categories;
+        public event EventHandler CanExecuteChanged {
+            add { CommandManager.RequerySuggested += value; }
+            remove { CommandManager.RequerySuggested += value; }
+        }
+
+        public PrintTicketCommand(ViewModel_Categories _viewModel_Categories) {
+            this._viewModel_Categories = _viewModel_Categories;
+        }
+
+        public bool CanExecute(object parameter) {
+            return (_viewModel_Categories.OrderProducts.Count > 0);
+        }
+
+        public void Execute(object parameter) {
+            _viewModel_Categories.PrintTicket();
 
         }
     }

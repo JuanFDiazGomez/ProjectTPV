@@ -15,58 +15,20 @@
     <Window.Background>
         <SolidColorBrush Opacity="0.8" Color="#515C6B"/>
     </Window.Background>
-    <Grid Margin="50" Background="#5D1916">
+    <Grid Margin="200,50,200,50" Background="#5D1916">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="3*"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <Grid Grid.Row="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-            <Button Margin="10" Background="#CFA66E">
-                <Image Source="/ProjectTPV;component/Resources/Images/img_en_construccion.png"/>
-            </Button>
-            <Button Margin="10" Grid.Column="1" Background="#CFA66E">
-                <Image Source="/ProjectTPV;component/Resources/Images/img_en_construccion.png"/>
-            </Button>
-            <Button Margin="10" Grid.Row="1" Grid.ColumnSpan="2" Background="#CFA66E" Command="{Binding ReturnCommand}" CommandParameter="{Binding ElementName=SalesWindowName}">
-                <Image Source="/ProjectTPV;component/Resources/Images/img_en_construccion.png"/>
-            </Button>
-        </Grid>
-        <DockPanel Grid.Row="0" Margin="10" Background="White">
-            <ToolBarTray DockPanel.Dock="Right" Orientation="Vertical" Background="#CFA66E">
-                <ToolBar Width="30" Background="#CFA66E" Style="{DynamicResource ToolBarWithoutOverflowStyle}" Padding="0">
-                    <Button Margin="0,30,-2,10" Command="{Binding OneMoreCommand}" CommandParameter="{Binding SelectedItem, ElementName=OrderListBox}">
-                        <Image Source="/ProjectTPV;component/Resources/Images/toolbar_plus.png"/>
-                    </Button>
-                    <Button Margin="0,10,-2,10" Command="{Binding OneLessCommand}" CommandParameter="{Binding SelectedItem, ElementName=OrderListBox}">
-                        <Image Source="/ProjectTPV;component/Resources/Images/toolbar_minus.png"/>
-                    </Button>
-                    <Button Margin="0,10,-2,10" Command="{Binding DeleteOrderProductCommand}" CommandParameter="{Binding SelectedItem, ElementName=OrderListBox}">
-                        <Image Source="/ProjectTPV;component/Resources/Images/toolbar_trash.png"/>
-                    </Button>
-                </ToolBar>
-            </ToolBarTray>
+        <DockPanel Margin="20" Background="White">
             <Grid DockPanel.Dock="Top" Background="#CFA66E">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="10*"/>
                     <ColumnDefinition Width="2*"/>
-                    <!--<ColumnDefinition Width="*"/>-->
                     <ColumnDefinition Width="3*"/>
                 </Grid.ColumnDefinitions>
                 <TextBlock Margin="5,5,1,5" Text="Nombre" HorizontalAlignment="Left"/>
                 <TextBlock Grid.Column="1" Margin="1,5,1,5" Text="Cant" HorizontalAlignment="Center"/>
-                <!--<TextBlock Grid.Column="2" Margin="1,5,1,5" Text="Precio" HorizontalAlignment="Right"/>-->
                 <TextBlock Grid.Column="2" Margin="1,5,5,5" Text="Total" HorizontalAlignment="Center"/>
             </Grid>
             <Border Margin="3" DockPanel.Dock="Bottom" BorderBrush="Black" BorderThickness="0,1,0,0">
@@ -76,7 +38,7 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     <TextBlock Grid.Column="1" Text="{Binding TotalPriceListTxt}" Background="White" HorizontalAlignment="Right"/>
-                    <TextBlock Text="Total: " Background="White" HorizontalAlignment="Right"/>
+                    <TextBlock Text="Total ticket: " Background="White" HorizontalAlignment="Right"/>
                 </Grid>
             </Border>
             <ListBox x:Name="OrderListBox" ItemsSource="{Binding OrderProducts}" Background="White" BorderThickness="0">
@@ -100,7 +62,6 @@
                                 <ColumnDefinition Width="10*"/>
                                 <ColumnDefinition Width="2*"/>
                                 <ColumnDefinition Width="3*"/>
-                                <!--<ColumnDefinition Width="*"/>-->
                             </Grid.ColumnDefinitions>
                             <Border BorderBrush="Black" BorderThickness="0,0,1,0">
                                 <TextBlock Margin="5,5,1,5"  Text="{Binding FormatName}" HorizontalAlignment="Left"/>
@@ -108,75 +69,45 @@
                             <Border Grid.Column="1" BorderBrush="Black" BorderThickness="0,0,1,0">
                                 <TextBlock  Margin="1,5,1,5" Padding="0,0,3,0" Text="{Binding Quantity}" HorizontalAlignment="Right"/>
                             </Border>
-                            <!--<TextBlock Grid.Column="2" Margin="1,5,1,5" Text="{Binding Price}" HorizontalAlignment="Right"/>-->
                             <TextBlock Grid.Column="2" Margin="1,5,5,5" Text="{Binding TotalPriceTxt}" HorizontalAlignment="Right"/>
                         </Grid>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
         </DockPanel>
-        <DockPanel Grid.Column="1" Margin="10"  Background="#CFA66E">
-            <StackPanel DockPanel.Dock="Right" VerticalAlignment="Center">
-                <ToolBarTray Orientation="Vertical"  Background="#CFA66E">
-                    <ToolBar Background="#CFA66E" Style="{DynamicResource ToolBarWithoutOverflowStyle}">
-                        <Button Content="&gt;" Command="{Binding NextProductPageCommand}"/>
-                        <Button Content="{Binding CurrentPageAndMaxPage}"/>
-                        <Button Content="&lt;" Command="{Binding PrevProductPageCommand}"/>
-                    </ToolBar>
-                </ToolBarTray>
-            </StackPanel>
-            <ListBox x:Name="ProductListBox" ItemsSource="{Binding Products}">
-                <ListBox.ItemContainerStyle>
-                    <Style TargetType="ListBoxItem">
-                        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-                        <Setter Property="VerticalContentAlignment" Value="Stretch" />
-                        <Setter Property="Padding" Value="0" />
-                        <Setter Property="BorderThickness" Value="0" />
-                    </Style>
-                </ListBox.ItemContainerStyle>
-                <ListBox.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <UniformGrid Columns="6" Rows="4" Background="#FFF0D4"/>
-                    </ItemsPanelTemplate>
-                </ListBox.ItemsPanel>
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <Button VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" ToolTip="{Binding Name}" Command="{Binding ElementName=ProductListBox, Path=DataContext.OrderProduct}" CommandParameter="{Binding}" Margin="5">
-                            <!-- <Button.Background>
-                                <ImageBrush ImageSource="{Binding ImgPath}" Stretch="Fill"/>
-                            </Button.Background>-->
-                            <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                                <DockPanel.Background>
-                                    <ImageBrush ImageSource="{Binding ImgPath}" Stretch="Uniform" RenderOptions.BitmapScalingMode="Linear"/>
-                                </DockPanel.Background>
-                                <StackPanel DockPanel.Dock="Bottom" Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Bottom">
-                                    <StackPanel.Background>
-                                        <SolidColorBrush Opacity="0.5" Color="#FFFFFF"/>
-                                    </StackPanel.Background>
-                                    <TextBlock Margin="3" Text="{Binding FormatName}" HorizontalAlignment="Center"/>
-                                    <TextBlock Text="{Binding PriceTxt}" HorizontalAlignment="Center"/>
-                                </StackPanel>
-                            </DockPanel>
-                        </Button>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
-        </DockPanel>
-        <ItemsControl x:Name="CategoryItemsControl" Grid.Row="1" Grid.Column="1" Margin="10" ItemsSource="{Binding Categories}">
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <UniformGrid Rows="1"/>
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <Button Background="White" Command="{Binding ElementName=CategoryItemsControl, Path=DataContext.ChangeProductListCommand}" CommandParameter="{Binding ProductList}">
-                        <WrapPanel Orientation="Vertical">
-                            <TextBlock Text="{Binding Name}" HorizontalAlignment="Center"/>
-                        </WrapPanel>
-                    </Button>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>
+        <Grid Grid.Column="1" Margin="10" HorizontalAlignment="Stretch" Background="#CFA66E">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Viewbox>
+                <TextBlock Grid.Row="0" HorizontalAlignment="Center" Margin="10"  TextWrapping="Wrap" VerticalAlignment="Center" Text="FORMAS DE PAGO" FontStretch="Normal"/>
+            </Viewbox>
+            <Button Grid.Row="1" Margin="10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Command="{Binding PrintTicketCommand}">
+                <Image Margin="5"  Source="/ProjectTPV;component/Resources/Images/paymentLogo/visa.png" RenderOptions.BitmapScalingMode="Fant"/>
+            </Button>
+            <Button Grid.Row="2" Margin="10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Command="{Binding PrintTicketCommand}">
+                <Image Margin="5" Source="/ProjectTPV;component/Resources/Images/paymentLogo/mastercard.png" RenderOptions.BitmapScalingMode="Fant"/>
+            </Button>
+            <Button Grid.Row="3" Margin="10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Command="{Binding PrintTicketCommand}">
+                <Image Margin="5" Source="/ProjectTPV;component/Resources/Images/paymentLogo/ticketRestaurant.png" RenderOptions.BitmapScalingMode="Fant"/>
+            </Button>
+            <Button Grid.Row="4" Margin="10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Command="{Binding PrintTicketCommand}">
+                <Image Margin="5" Source="/ProjectTPV;component/Resources/Images/paymentLogo/paypal.png" RenderOptions.BitmapScalingMode="Fant"/>
+            </Button>
+            <Button Grid.Row="5" Margin="10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Command="{Binding PrintTicketCommand}">
+                <Image Margin="5" Source="/ProjectTPV;component/Resources/Images/paymentLogo/cash.png" RenderOptions.BitmapScalingMode="Fant"/>
+            </Button>
+            <Button Grid.Row="6" Margin="10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Command="{Binding ReturnCommand}" CommandParameter="{Binding ElementName=SalesWindowName}">
+                <Viewbox>
+                    <TextBlock Grid.Row="0" HorizontalAlignment="Center" Margin="10"  TextWrapping="Wrap" VerticalAlignment="Center" Text="Volver" FontStretch="Normal"/>
+                </Viewbox>
+            </Button>
+        </Grid>
     </Grid>
 </Window>

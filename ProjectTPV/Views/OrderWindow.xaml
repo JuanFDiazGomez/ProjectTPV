@@ -43,7 +43,7 @@
                 <Image Source="/ProjectTPV;component/Resources/Images/img_en_construccion.png"/>
             </Button>
         </Grid>
-        <DockPanel Grid.Row="0" Margin="10" Background="White">
+        <DockPanel x:Name="OrderList" Grid.Row="0" Margin="10" Background="White">
             <ToolBarTray DockPanel.Dock="Right" Orientation="Vertical" Background="#CFA66E">
                 <ToolBar Width="30" Background="#CFA66E" Style="{DynamicResource ToolBarWithoutOverflowStyle}" Padding="0">
                     <Button Margin="0,30,-2,10" Command="{Binding OneMoreCommand}" CommandParameter="{Binding SelectedItem, ElementName=OrderListBox}">

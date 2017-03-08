@@ -31,7 +31,7 @@ namespace ProjectTPV.Models {
         }
 
         public string FormatName {
-            get { return (_name.Length > 22) ? _name.Substring(0, 22)+"..." : _name; }
+            get { return (_name.Length > 19) ? _name.Substring(0, 19)+"..." : _name; }
             set { _name = value; }
         }
         public string ImgPath {
@@ -47,7 +47,7 @@ namespace ProjectTPV.Models {
             set { _price = value; }
         }
         public string PriceTxt {
-            get { return _price.ToString("N2")+" €"; }
+            get { return _price.ToString("C2"); }
         }
         public int Quantity {
             get { return _Quantity; }
@@ -71,7 +71,7 @@ namespace ProjectTPV.Models {
         }
 
         public string TotalPriceTxt {
-            get { return TotalPrice.ToString("N2"); }
+            get { return TotalPrice.ToString("C2"); }
         }
     }
 
