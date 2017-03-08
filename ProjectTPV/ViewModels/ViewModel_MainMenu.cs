@@ -8,11 +8,12 @@ using System.IO;
 using System.Windows.Input;
 using System.Windows.Controls;
 using System.Windows;
+using System.Collections.ObjectModel;
 
 namespace ProjectTPV.ViewModels {
     public class ViewModel_MainMenu {
         private MainMenu _MainMenu;
-        private OpenNewWindowCommand _OpenNewWindowCommand; 
+        private OpenNewWindowCommand _OpenNewWindowCommand;
 
         public ViewModel_MainMenu() {
             _MainMenu = new MainMenu();
@@ -53,6 +54,9 @@ namespace ProjectTPV.ViewModels {
 
         public Window OrderWindow {
             get { return _MainMenu.OrderWindow; }
+        }
+        public Window SalesWindow {
+            get { return _MainMenu.SalesWindow; }
         }
 
         public void OpenNewWindow(Window view) {

@@ -50,6 +50,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MySql.Data, Version=6.9.9.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
     <Reference Include="PresentationFramework.Aero2" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -73,9 +74,12 @@
     </ApplicationDefinition>
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Product.cs" />
-    <Compile Include="ViewModels\ViewModel_Product.cs" />
+    <Compile Include="ViewModels\ViewModel_Categories.cs" />
     <Compile Include="Views\OrderWindow.xaml.cs">
       <DependentUpon>OrderWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SalesWindow.xaml.cs">
+      <DependentUpon>SalesWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="Resources\Dictionaries\ToolBarStyleWithoutOverflow.xaml">
       <SubType>Designer</SubType>
@@ -96,6 +100,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Views\OrderWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SalesWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -141,6 +149,54 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Images\img_en_construccion.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\agua_05l.png" />
+    <Resource Include="Resources\Images\agua_1l.png" />
+    <Resource Include="Resources\Images\angus.png" />
+    <Resource Include="Resources\Images\anna_codorniu.png" />
+    <Resource Include="Resources\Images\berenjenas.png" />
+    <Resource Include="Resources\Images\bitterkas.png" />
+    <Resource Include="Resources\Images\cafe_con_leche.png" />
+    <Resource Include="Resources\Images\cafe_cortado.png" />
+    <Resource Include="Resources\Images\cafe_solo.png" />
+    <Resource Include="Resources\Images\cerveza_gr.png" />
+    <Resource Include="Resources\Images\cerveza_med.png" />
+    <Resource Include="Resources\Images\cerveza_peq.png" />
+    <Resource Include="Resources\Images\cerveza_tanque.png" />
+    <Resource Include="Resources\Images\ceviche.png" />
+    <Resource Include="Resources\Images\chuleton.png" />
+    <Resource Include="Resources\Images\cocacola.png" />
+    <Resource Include="Resources\Images\cocacola_light.png" />
+    <Resource Include="Resources\Images\cocacola_zero.png" />
+    <Resource Include="Resources\Images\croquetas.png" />
+    <Resource Include="Resources\Images\emilio_moro.png" />
+    <Resource Include="Resources\Images\ensalada.png" />
+    <Resource Include="Resources\Images\fanta_limon.png" />
+    <Resource Include="Resources\Images\fanta_naranja.png" />
+    <Resource Include="Resources\Images\finca_colina.png" />
+    <Resource Include="Resources\Images\finca_resalso.png" />
+    <Resource Include="Resources\Images\gamba.png" />
+    <Resource Include="Resources\Images\hamburguesa_wayu.png" />
+    <Resource Include="Resources\Images\helado.png" />
+    <Resource Include="Resources\Images\infusion.png" />
+    <Resource Include="Resources\Images\marmitako.png" />
+    <Resource Include="Resources\Images\mouse.png" />
+    <Resource Include="Resources\Images\pago_capellanes.png" />
+    <Resource Include="Resources\Images\protos_roble.png" />
+    <Resource Include="Resources\Images\souffle.png" />
+    <Resource Include="Resources\Images\steak_tartar.png" />
+    <Resource Include="Resources\Images\tarta.png" />
+    <Resource Include="Resources\Images\tartar_atun.png" />
+    <Resource Include="Resources\Images\tataki.png" />
+    <Resource Include="Resources\Images\tellinas.png" />
+    <Resource Include="Resources\Images\tinto_verano.png" />
+    <Resource Include="Resources\Images\veuve_clicquot.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\toolbar_minus.png" />
+    <Resource Include="Resources\Images\toolbar_plus.png" />
+    <Resource Include="Resources\Images\toolbar_trash.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

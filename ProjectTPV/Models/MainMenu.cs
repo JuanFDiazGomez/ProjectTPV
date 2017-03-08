@@ -22,9 +22,14 @@ namespace ProjectTPV.Models {
         private string _imgPathCaja = "/ProjectTPV;component/Resources/Images/img_en_construccion.png";
         private string _imgPathAcercaDe = "/ProjectTPV;component/Resources/Images/img_en_construccion.png";
 
-        private OrderWindow _orderWindow = new OrderWindow();
+        private OrderWindow _orderWindow;
+        private SalesWindow _salesWindow;
 
-        public MainMenu() {}
+        public MainMenu() {
+            this._orderWindow = new OrderWindow();
+            this._salesWindow = new SalesWindow(this._orderWindow.DataContext);
+
+        }
 
         public string NameTPV {
             get { return _nameTPV; }
@@ -57,6 +62,10 @@ namespace ProjectTPV.Models {
 
         public Window OrderWindow {
             get { return _orderWindow; }
+        }
+
+        public Window SalesWindow {
+            get { return _salesWindow; }
         }
     }
 }

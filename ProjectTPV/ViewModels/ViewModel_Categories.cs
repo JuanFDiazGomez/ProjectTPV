@@ -1,11 +1,10 @@
-﻿using ProjectTPV.Models;
+﻿using MySql.Data.MySqlClient;
+using ProjectTPV.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
@@ -50,7 +49,7 @@ namespace ProjectTPV.ViewModels {
 
         protected void OnPropertyChanged(string NameProperty) {
             PropertyChangedEventHandler handler = PropertyChanged;
-            if(handler != null) {
+            if (handler != null) {
                 handler(this, new PropertyChangedEventArgs(NameProperty));
             }
 
@@ -103,37 +102,67 @@ namespace ProjectTPV.ViewModels {
             get { return _prevProductPageCommand; }
         }
         public void InitilizeCategories() {
-            string[] Name = { "Cous Cous", "Shushi", "Gamba Roja", "Marmitako de Atun", "Helado de Limon" };
-            string ImgPath = "/ProjectTPV;component/Resources/Images/img_en_construccion.png";
+            String serv = "server=localhost;";
+            String db = "database=tpv_project;";
+            String user = "uid=root;";
+            String pwd = "pwd=7891;";
+            String port = "port=3306;";
+            String security = "persistsecurityinfo = True;";
+            MySqlConnection conex = new MySqlConnection(serv + db + user + pwd + port + security);
+            conex.Open();
+            MySqlCommand cmd = conex.CreateCommand();
+            string sql =
+                "SELECT name,img_path,price,P.category_name " +
+                "FROM products P,categories C " +
+                "WHERE P.category_name = C.category_name " +
+                "ORDER BY category_position";
+            cmd.CommandText = sql;
+            MySqlDataReader mdr = cmd.ExecuteReader();
+            string PrevCategory = "";
+            Category category = null;
+            while (mdr.Read()) {
+                if (!PrevCategory.Equals(mdr.GetString(3))) {
+                    PrevCategory = mdr.GetString(3);
+                    if(category != null) { _categories.Add(category); }
+                    category = new Category(mdr.GetString(3));
+                }
+                category.AddProduct(new Product(mdr.GetString(0), mdr.GetString(1), mdr.GetDouble(2)));
+            }
+            _categories.Add(category);
+            ChangeProductList(_categories.First<Category>().ProductList);
+            mdr.Close();
+            conex.Close();
+            /*string[] FormatName = { "Cous Cous", "Shushi", "Gamba Roja", "Marmitako de Atun", "Helado de Limon" };
+            string[] ImgPath = { "tellinas.png", "gamba.png", "tartar_atun.png", "finca_colina.png", "helado.png" };
             string[] Category = { "Bebidas", "Vinos y Cavas", "Entrantes", "Principales", "Postres" };
             double[] Price = { 222.55, 3, 4, 5, 2 };
-            for(int i = 0 ; i < Category.Length ; i++) {
+            for (int i = 0; i < Category.Length; i++) {
                 Category category = new Category(Category[i]);
-                for(int j = 0 ; j < 60 ; j++) {
-                    category.AddProduct(new Product(Name[i], ImgPath, Category[i], Price[i]));
+                for (int j = 0; j < 60; j++) {
+                    category.AddProduct(new Product(FormatName[i], ImgPath[i], Category[i], Price[i]));
                 }
                 _categories.Add(category);
             }
-            ChangeProductList(_categories.First<Category>().ProductList);
+            ChangeProductList(_categories.First<Category>().ProductList);*/
         }
 
         internal void ChangeProductList(ObservableCollection<Product> list) {
             CurrentPage = 1;
             _currentProductList = list;
             _ShownProducts.Clear();
-            foreach(Product product in list.Take<Product>(LIMIT_PRODUCT_PAGE)) {
+            foreach (Product product in list.Take<Product>(LIMIT_PRODUCT_PAGE)) {
                 _ShownProducts.Add(product);
             }
         }
 
         internal void AddProductOrder(Product product) {
-            if(product.Quantity == 0) {
+            if (product.Quantity == 0) {
                 product.Quantity = 1;
                 _orderProducts.Add(product);
             } else {
                 product.Quantity += 1;
             }
-            OnPropertyChanged("TotalPriceList");
+            OnPropertyChanged("TotalPriceListTxt");
         }
 
         internal void Return(Window window) {
@@ -142,23 +171,23 @@ namespace ProjectTPV.ViewModels {
 
         internal void OneMore(Product product) {
             product.Quantity++;
-            OnPropertyChanged("TotalPriceList");
+            OnPropertyChanged("TotalPriceListTxt");
         }
 
         internal void OneLess(Product product) {
             product.Quantity--;
-            OnPropertyChanged("TotalPriceList");
+            OnPropertyChanged("TotalPriceListTxt");
         }
 
         internal void DeleteOrderProduct(Product product) {
             _orderProducts.Remove(product);
             product.Quantity = 0;
-            OnPropertyChanged("TotalPriceList");
+            OnPropertyChanged("TotalPriceListTxt");
         }
 
         internal void NextProductPage() {
             _ShownProducts.Clear();
-            foreach(Product product in _currentProductList.Skip<Product>(_currentPage * LIMIT_PRODUCT_PAGE).Take<Product>(LIMIT_PRODUCT_PAGE)) {
+            foreach (Product product in _currentProductList.Skip<Product>(_currentPage * LIMIT_PRODUCT_PAGE).Take<Product>(LIMIT_PRODUCT_PAGE)) {
                 _ShownProducts.Add(product);
             }
             CurrentPage++;
@@ -170,10 +199,14 @@ namespace ProjectTPV.ViewModels {
             get { return _orderProducts.Sum<Product>(x => x.TotalPrice); }
         }
 
+        public string TotalPriceListTxt {
+            get { return TotalPriceList.ToString("N2"); }
+        }
+
         internal void PrevProductPage() {
             _ShownProducts.Clear();
             CurrentPage--;
-            foreach(Product product in _currentProductList.Skip<Product>((_currentPage - 1) * LIMIT_PRODUCT_PAGE).Take<Product>(LIMIT_PRODUCT_PAGE)) {
+            foreach (Product product in _currentProductList.Skip<Product>((_currentPage - 1) * LIMIT_PRODUCT_PAGE).Take<Product>(LIMIT_PRODUCT_PAGE)) {
                 _ShownProducts.Add(product);
             }
 
