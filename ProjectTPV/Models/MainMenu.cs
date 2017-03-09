@@ -17,18 +17,19 @@ namespace ProjectTPV.Models {
         private string _nameCaja = "CAJA";
         private string _nameAcercaDe = "INFORMACIÓN";
 
-        private string _imgPathTPV = "/ProjectTPV;component/Resources/Images/img_en_construccion.png";
+        private string _imgPathTPV = "/ProjectTPV;component/Resources/Images/paymentLogo/pedir.png";
         private string _imgPathSugerencias = "/ProjectTPV;component/Resources/Images/img_en_construccion.png";
-        private string _imgPathCaja = "/ProjectTPV;component/Resources/Images/img_en_construccion.png";
-        private string _imgPathAcercaDe = "/ProjectTPV;component/Resources/Images/img_en_construccion.png";
+        private string _imgPathCaja = "/ProjectTPV;component/Resources/Images/paymentLogo/pagar.png";
+        private string _imgPathAcercaDe = "/ProjectTPV;component/Resources/Images/paymentLogo/info.png";
 
         private OrderWindow _orderWindow;
         private SalesWindow _salesWindow;
+        private InfoWindow _infoWindow;
 
         public MainMenu() {
             this._orderWindow = new OrderWindow();
             this._salesWindow = new SalesWindow(this._orderWindow.DataContext);
-
+            this._infoWindow = new InfoWindow();
         }
 
         public string NameTPV {
@@ -66,6 +67,10 @@ namespace ProjectTPV.Models {
 
         public Window SalesWindow {
             get { return _salesWindow; }
+        }
+
+        public Window InfoWindow {
+            get { return _infoWindow; }
         }
     }
 }

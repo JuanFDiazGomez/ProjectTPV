@@ -22,5 +22,9 @@ namespace ProjectTPV.Views {
             InitializeComponent();
             DataContext = new ViewModel_Categories();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e) {
+            MessageBox.Show("Pedido realizado!");
+        }
     }
 }

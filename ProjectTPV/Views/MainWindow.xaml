@@ -27,18 +27,22 @@
                     <RowDefinition Height="3*"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <Image Stretch="Fill" Source="{Binding PathImgTPV}"/>
-                <TextBlock Grid.Row="1" Text="{Binding NameTPV}" TextAlignment="Center"/>
+                <Image Stretch="Uniform" Source="{Binding PathImgTPV}"/>
+                <Viewbox Margin="5" Grid.Row="1">
+                    <TextBlock  Text="{Binding NameTPV}" TextAlignment="Center"/>
+                </Viewbox>
             </Grid>
         </Button>
-        <Button Grid.Column="1" BorderThickness="0" Margin="5,10,10,5" Background="#6B2404">
+        <Button Grid.Column="1" BorderThickness="0" Margin="5,10,10,5" Background="#6B2404" Click="Button_Click">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="3*"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <Image Stretch="Fill" Source="{Binding PathImgSugerencias}"/>
-                <TextBlock Grid.Row="1" Text="{Binding NameSugerencias}" TextAlignment="Center"/>
+                <Image Stretch="Uniform" Source="{Binding PathImgSugerencias}"/>
+                <Viewbox Margin="5" Grid.Row="1">
+                    <TextBlock Grid.Row="1" Text="{Binding NameSugerencias}" TextAlignment="Center"/>
+                </Viewbox>
             </Grid>
         </Button>
         <Button Grid.Row="1"  BorderThickness="0" Margin="10,5,5,10" Background="#844205" Command="{Binding OpenNewWindowCommand}" CommandParameter="{Binding SalesWindow}">
@@ -47,18 +51,22 @@
                     <RowDefinition Height="3*"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <Image Stretch="Fill" Source="{Binding PathImgCaja}"/>
-                <TextBlock Grid.Row="1" Text="{Binding NameCaja}" TextAlignment="Center"/>
+                <Image Stretch="Uniform" Source="{Binding PathImgCaja}"/>
+                <Viewbox Margin="5" Grid.Row="1">
+                    <TextBlock Text="{Binding NameCaja}" TextAlignment="Center"/>
+                </Viewbox>
             </Grid>
         </Button>
-        <Button Grid.Row="1" Grid.Column="1" BorderThickness="0" Margin="5,5,10,10"  Background="#B08C76">
+        <Button Grid.Row="1" Grid.Column="1" BorderThickness="0" Margin="5,5,10,10"  Background="#B08C76" Command="{Binding OpenNewWindowCommand}" CommandParameter="{Binding InfoWindow}">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="3*"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <Image Stretch="Fill" Source="{Binding PathImgAcercaDe}"/>
-                <TextBlock Grid.Row="1" Text="{Binding NameAcercaDe}" TextAlignment="Center"/>
+                <Image Stretch="Uniform" Source="{Binding PathImgAcercaDe}"/>
+                <Viewbox Margin="5" Grid.Row="1">
+                    <TextBlock Text="{Binding NameAcercaDe}" TextAlignment="Center"/>
+                </Viewbox>
             </Grid>
         </Button>
     </Grid>

@@ -25,27 +25,24 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <Button Margin="10" Background="#CFA66E">
-                <Image Source="/ProjectTPV;component/Resources/Images/img_en_construccion.png"/>
+            <Button Margin="10" Background="#CFA66E" Click="Button_Click">
+                <Viewbox Margin="5">
+                    <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Center" Text="Pedir" FontStretch="Normal"/>
+                </Viewbox>
             </Button>
-            <Button Margin="10" Grid.Column="1" Background="#CFA66E">
-                <Image Source="/ProjectTPV;component/Resources/Images/img_en_construccion.png"/>
-            </Button>
-            <Button Margin="10" Grid.Row="1" Grid.ColumnSpan="2" Background="#CFA66E" Command="{Binding ReturnCommand}" CommandParameter="{Binding ElementName=OrderWindowName}">
-                <Image Source="/ProjectTPV;component/Resources/Images/img_en_construccion.png"/>
+            <Button Margin="10" Grid.Row="1" Background="#CFA66E" Command="{Binding ReturnCommand}" CommandParameter="{Binding ElementName=OrderWindowName}">
+                <Viewbox Margin="5">
+                    <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Center" Text="Voler" FontStretch="Normal"/>
+                </Viewbox>
             </Button>
         </Grid>
         <DockPanel x:Name="OrderList" Grid.Row="0" Margin="10" Background="White">
             <ToolBarTray DockPanel.Dock="Right" Orientation="Vertical" Background="#CFA66E">
-                <ToolBar Width="30" Background="#CFA66E" Style="{DynamicResource ToolBarWithoutOverflowStyle}" Padding="0">
+                <ToolBar Width="20" Background="#CFA66E" Style="{DynamicResource ToolBarWithoutOverflowStyle}" Padding="0">
                     <Button Margin="0,30,-2,10" Command="{Binding OneMoreCommand}" CommandParameter="{Binding SelectedItem, ElementName=OrderListBox}">
                         <Image Source="/ProjectTPV;component/Resources/Images/toolbar_plus.png"/>
                     </Button>

@@ -104,6 +104,9 @@
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="ViewModels\ViewModel_Categories.cs" />
+    <Compile Include="Views\InfoWindow.xaml.cs">
+      <DependentUpon>InfoWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\OrderWindow.xaml.cs">
       <DependentUpon>OrderWindow.xaml</DependentUpon>
     </Compile>
@@ -111,6 +114,10 @@
       <DependentUpon>SalesWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="Resources\Dictionaries\ToolBarStyleWithoutOverflow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\InfoWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -236,6 +243,15 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Images\paymentLogo\logoRestaurant.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\paymentLogo\info.png" />
+    <Resource Include="Resources\Images\paymentLogo\pagar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\info.png" />
+    <Resource Include="Resources\Images\pagar.png" />
+    <Resource Include="Resources\Images\paymentLogo\pedir.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

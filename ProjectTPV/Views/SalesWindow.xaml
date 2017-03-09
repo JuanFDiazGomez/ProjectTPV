@@ -20,7 +20,7 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <DockPanel Margin="20" Background="White">
+        <DockPanel Margin="10" Background="White">
             <Grid DockPanel.Dock="Top" Background="#CFA66E">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="10*"/>
@@ -105,7 +105,7 @@
             </Button>
             <Button Grid.Row="6" Margin="10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Command="{Binding ReturnCommand}" CommandParameter="{Binding ElementName=SalesWindowName}">
                 <Viewbox>
-                    <TextBlock Grid.Row="0" HorizontalAlignment="Center" Margin="10"  TextWrapping="Wrap" VerticalAlignment="Center" Text="Volver" FontStretch="Normal"/>
+                    <TextBlock HorizontalAlignment="Center" Margin="10"  TextWrapping="Wrap" VerticalAlignment="Center" Text="Volver" FontStretch="Normal"/>
                 </Viewbox>
             </Button>
         </Grid>

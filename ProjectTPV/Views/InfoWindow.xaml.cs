@@ -10,24 +10,23 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
-using ProjectTPV.ViewModels;
-using System.Reflection;
-using System.IO;
 
-namespace ProjectTPV {
+namespace ProjectTPV.Views {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Lógica de interacción para InfoWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window {
-        public MainWindow() {
+    public partial class InfoWindow : Window {
+        public InfoWindow() {
             InitializeComponent();
-            DataContext = new ViewModel_MainMenu();
+        }
+
+        private void BotonCerrar_Click(object sender, RoutedEventArgs e) {
+            Application.Current.Shutdown();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e) {
-            MessageBox.Show("Lo sentimos, esta pagina esta en construccion");
+            this.Hide();
         }
     }
 }

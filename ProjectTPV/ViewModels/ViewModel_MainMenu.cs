@@ -58,6 +58,9 @@ namespace ProjectTPV.ViewModels {
         public Window SalesWindow {
             get { return _MainMenu.SalesWindow; }
         }
+        public Window InfoWindow {
+            get { return _MainMenu.InfoWindow; }
+        }
 
         public void OpenNewWindow(Window view) {
             view.Show();
